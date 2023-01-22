@@ -31,7 +31,7 @@ int main() {
         fprintf(stderr, "Error! [ ftok() has failed ]\n");
         exit(EXIT_FAILURE);
     }
-    int sharedMemoryID = shmget(sharedMemoryKey, SHAREDMEMORY_SIZE, IPC_CREAT | 0666);
+    int sharedMemoryID = shmget(sharedMemoryKey, SHAREDMEMORY_SIZE * sizeof(int), IPC_CREAT | 0666);
     if (sharedMemoryID == -1) {
         perror("shmget()");
         fprintf(stderr, "Error number [ %d ]\n", errno);
