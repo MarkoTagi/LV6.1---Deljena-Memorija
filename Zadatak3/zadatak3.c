@@ -100,7 +100,7 @@ int main() {
                 semop(chopstickLockID, &unlock, 1);
             }
             else {
-                printf("%s: (Damn, hes using the chopsticks...)\n", philosophers[0]->name); 
+                printf("%s: (Hes using the chopsticks...)\n", philosophers[0]->name); 
                 sleep(2);
                 philosophers[0]->currentState = thinking;
             }
@@ -120,7 +120,7 @@ int main() {
                     int thinkingSeconds = rand() % 9 + 1;
                     sleep(thinkingSeconds);
                     philosophers[1]->currentState = hungry;
-                    printf("%s: (I'm really hungry...)\n", philosophers[1]->name);  
+                    printf("%s: (I'm really hungry...)\n", philosophers[1]->name); fflush(stdout); 
                 }
                 if (sharedMemoryPointer[1] == 1 && sharedMemoryPointer[0] == 1) {
                     lock.sem_num = 1;
@@ -130,7 +130,7 @@ int main() {
                     sharedMemoryPointer[1] = 0;
                     sharedMemoryPointer[0] = 0;
                     philosophers[1]->currentState = eating;
-                    printf("%s: (So tasty...)\n", philosophers[1]->name);
+                    printf("%s: (So tasty...)\n", philosophers[1]->name); fflush(stdout);
                     int eatingSeconds = rand() % 9 + 1;
                     sleep(eatingSeconds);
                     sharedMemoryPointer[1] = 1;
@@ -142,7 +142,7 @@ int main() {
                     semop(chopstickLockID, &unlock, 1);
                 }
                 else {
-                    printf("%s: (Damn, hes using the chopsticks...)\n", philosophers[1]->name);
+                    printf("%s: (Hes using the chopsticks...)\n", philosophers[1]->name);
                     sleep(2);
                     philosophers[1]->currentState = thinking;
                 }
@@ -162,7 +162,7 @@ int main() {
                         int thinkingSeconds = rand() % 9 + 1;
                         sleep(thinkingSeconds);
                         philosophers[2]->currentState = hungry;
-                        printf("%s: (I'm really hungry...)\n", philosophers[2]->name);  
+                        printf("%s: (I'm really hungry...)\n", philosophers[2]->name); fflush(stdout);
                     }
                     if (sharedMemoryPointer[2] == 1 && sharedMemoryPointer[1] == 1) {
                         lock.sem_num = 2;
@@ -172,7 +172,7 @@ int main() {
                         sharedMemoryPointer[2] = 0;
                         sharedMemoryPointer[1] = 0;
                         philosophers[2]->currentState = eating;
-                        printf("%s: (So tasty...)\n", philosophers[2]->name);
+                        printf("%s: (So tasty...)\n", philosophers[2]->name); fflush(stdout);
                         int eatingSeconds = rand() % 9 + 1;
                         sleep(eatingSeconds);
                         sharedMemoryPointer[2] = 1;
@@ -184,7 +184,7 @@ int main() {
                         semop(chopstickLockID, &unlock, 1);
                     }
                     else {
-                        printf("%s: (Damn, hes using the chopsticks...)\n", philosophers[2]->name);
+                        printf("%s: (Hes using the chopsticks...)\n", philosophers[2]->name);
                         sleep(2);
                         philosophers[2]->currentState = thinking;
                     }
@@ -204,7 +204,7 @@ int main() {
                             int thinkingSeconds = rand() % 9 + 1;
                             sleep(thinkingSeconds);
                             philosophers[3]->currentState = hungry;
-                            printf("%s: (I'm really hungry...)\n", philosophers[3]->name);  
+                            printf("%s: (I'm really hungry...)\n", philosophers[3]->name); fflush(stdout);
                         }
                         if (sharedMemoryPointer[3] == 1 && sharedMemoryPointer[2] == 1) {
                             lock.sem_num = 3;
@@ -214,7 +214,7 @@ int main() {
                             sharedMemoryPointer[3] = 0;
                             sharedMemoryPointer[2] = 0;
                             philosophers[3]->currentState = eating;
-                            printf("%s: (So tasty...)\n", philosophers[3]->name);
+                            printf("%s: (So tasty...)\n", philosophers[3]->name); fflush(stdout);
                             int eatingSeconds = rand() % 9 + 1;
                             sleep(eatingSeconds);
                             sharedMemoryPointer[3] = 1;
@@ -226,7 +226,7 @@ int main() {
                             semop(chopstickLockID, &unlock, 1);
                         }
                         else {
-                            printf("%s: (Damn, hes using the chopsticks...)\n", philosophers[3]->name);
+                            printf("%s: (Hes using the chopsticks...)\n", philosophers[3]->name);
                             sleep(2);
                             philosophers[3]->currentState = thinking;
                         }
@@ -240,7 +240,7 @@ int main() {
                             int thinkingSeconds = rand() % 9 + 1;
                             sleep(thinkingSeconds);
                             philosophers[4]->currentState = hungry;
-                            printf("%s: (I'm really hungry...)\n", philosophers[4]->name);  
+                            printf("%s: (I'm really hungry...)\n", philosophers[4]->name); fflush(stdout);
                         }
                         if (sharedMemoryPointer[4] == 1 && sharedMemoryPointer[3] == 1) {
                             lock.sem_num = 4;
@@ -250,7 +250,7 @@ int main() {
                             sharedMemoryPointer[4] = 0;
                             sharedMemoryPointer[3] = 0;
                             philosophers[4]->currentState = eating;
-                            printf("%s: (So tasty...)\n", philosophers[4]->name);
+                            printf("%s: (So tasty...)\n", philosophers[4]->name); fflush(stdout);
                             int eatingSeconds = rand() % 9 + 1;
                             sleep(eatingSeconds);
                             sharedMemoryPointer[4] = 1;
@@ -262,7 +262,7 @@ int main() {
                             semop(chopstickLockID, &unlock, 1);
                         }
                         else {
-                            printf("%s: (Damn, hes using the chopsticks...)\n", philosophers[4]->name);
+                            printf("%s: (Hes using the chopsticks...)\n", philosophers[4]->name);
                             sleep(2);
                             philosophers[4]->currentState = thinking;
                         }
