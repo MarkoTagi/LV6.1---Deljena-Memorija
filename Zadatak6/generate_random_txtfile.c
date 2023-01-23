@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
         default:
             break;
     }
-    printf("Successfully generated file!\n"); fflush(stdout);
+    // printf("Successfully generated file!\n"); fflush(stdout);
     fclose(filePointer);
     return 0;
 }

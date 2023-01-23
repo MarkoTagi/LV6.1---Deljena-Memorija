@@ -109,7 +109,8 @@ int main(int argc, char** argv) {
             semop(writeMutexId, &semaphoreWait, 1);
             semop(mutexId, &semaphoreWait, 1);
             int currentPosition = ((int*)sharedMemoryPointer)[0];
-            printf("Writing [ %c ] @ [ %d ]\n", characterBuffer, ++currentPosition); fflush(stdout);
+            // printf("Writing [ %c ] @ [ %d ]\n", characterBuffer, ++currentPosition); fflush(stdout);
+            ++currentPosition;
             ((char*)sharedMemoryPointer)[currentPosition + sizeof(int)] = characterBuffer;
             ((int*)sharedMemoryPointer)[0] = currentPosition;
             semop(readSemaphoreId, &semaphorePost, 1);
@@ -117,7 +118,7 @@ int main(int argc, char** argv) {
         }
         shmdt(sharedMemoryPointer);
         wait(NULL);
-        printf("The parent process is now exiting...\n");
+        // printf("The parent process is now exiting...\n");
     }
     else {
         char* sharedMemoryPointer = (char*)shmat(sharedMemoryId, NULL, 0);
@@ -136,14 +137,15 @@ int main(int argc, char** argv) {
             semop(readSemaphoreId, &semaphoreWait, 1);
             semop(mutexId, &semaphoreWait, 1);
             characterBuffer = sharedMemoryPointer[sizeof(int) + readAt];
-            printf("Reading [ %c ] @ [ %d ]\n", characterBuffer, readAt++); fflush(stdout);
+            readAt++;
+            // printf("Reading [ %c ] @ [ %d ]\n", characterBuffer, readAt++); fflush(stdout);
             fputc(characterBuffer, copyFilePointer);
             semop(writeMutexId, &semaphorePost, 1);
             semop(mutexId, &semaphorePost, 1);
         }
         fclose(copyFilePointer);
         shmdt(sharedMemoryPointer);
-        printf("The child process is now exiting...\n");
+        // printf("The child process is now exiting...\n");
     }
     semctl(mutexId, 0, IPC_RMID);
     semctl(writeMutexId, 0, IPC_RMID);
